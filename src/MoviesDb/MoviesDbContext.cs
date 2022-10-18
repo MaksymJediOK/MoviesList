@@ -19,6 +19,7 @@ namespace MoviesCore
             builder.Entity<Movie>()
                 .HasMany(x => x.Actors)
                 .WithMany(x => x.Movies);
+            builder.Seed();
             base.OnModelCreating(builder);
         }
         public MoviesDbContext(DbContextOptions<MoviesDbContext> options)
