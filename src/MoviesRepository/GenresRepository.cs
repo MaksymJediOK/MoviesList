@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MoviesRepository
 {
-    public class GenreRepository
+    public class GenresRepository
     {
         private readonly MoviesDbContext _ctx;
-        public GenreRepository(MoviesDbContext ctx)
+        public GenresRepository(MoviesDbContext ctx)
         {
             _ctx = ctx;
         }

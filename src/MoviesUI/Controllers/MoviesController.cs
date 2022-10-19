@@ -1,39 +1,54 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MoviesRepository;
+using Microsoft.EntityFrameworkCore;
 using MoviesCore;
+using MoviesRepository;
+
 namespace MoviesUI.Controllers
 {
-    public class GenreController : Controller
+    [Authorize]
+    public class MoviesController : Controller
     {
-        private readonly GenreRepository _genreRepository;
         private readonly MoviesDbContext dbContext;
-        public GenreController(MoviesDbContext dbContext)
+        private readonly MoviesRepository.MoviesRepository _moviesRepository;
+        public MoviesController(MoviesDbContext dbContext)
         {
-            _genreRepository = new GenreRepository(dbContext);
+
             this.dbContext = dbContext;
         }
-
+        // GET: MovieController
         public ActionResult Index()
         {
-            var allgenres = _genreRepository.GetGenres();
-            //ViewData["Genres"] = allgenres;
-            return View(allgenres);
+            var MoviesWithEv = dbContext.Movies
+                .Include(x => x.Genres)
+                .Include(x => x.Directors)
+                .ToList();
+
+            return View(MoviesWithEv);
         }
 
-        // GET: GenreController/Details/5
-        public ActionResult Details(int id)
+        // GET: MovieController/Details/5
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null) return NotFound();
+
+            var movie = dbContext.Movies
+                .Include(x => x.Directors)
+                .Include(x => x.Actors)
+                .Include(x => x.Genres)
+                .FirstOrDefault(x => x.Id == id);
+            if (movie == null) return NotFound();
+
+            return View(movie);
         }
 
-        // GET: GenreController/Create
+        // GET: MovieController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GenreController/Create
+        // POST: MovieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -48,13 +63,13 @@ namespace MoviesUI.Controllers
             }
         }
 
-        // GET: GenreController/Edit/5
+        // GET: MovieController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: GenreController/Edit/5
+        // POST: MovieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -69,13 +84,13 @@ namespace MoviesUI.Controllers
             }
         }
 
-        // GET: GenreController/Delete/5
+        // GET: MovieController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: GenreController/Delete/5
+        // POST: MovieController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -89,5 +104,7 @@ namespace MoviesUI.Controllers
                 return View();
             }
         }
+
+
     }
 }
