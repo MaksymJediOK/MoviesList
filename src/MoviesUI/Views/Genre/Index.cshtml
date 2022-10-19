@@ -1,0 +1,15 @@
+﻿@model List<Genre>
+@using MoviesCore
+
+@{
+    
+}
+
+<div> Test page to show data</div>
+
+<div>
+    @foreach (var item in Model)
+    {
+        <p>@item.GenreName</p>
+    }
+</div>
