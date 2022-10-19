@@ -16,5 +16,10 @@ namespace MoviesRepository
             return  _ctx.Movies.ToList();
         }
 
+        public Movie GetMovieById(int ID)
+        {
+            return _ctx.Movies.FirstOrDefault(x => x.Id == ID);
+        }
+
     }
 }

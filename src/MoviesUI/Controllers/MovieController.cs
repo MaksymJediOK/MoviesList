@@ -11,6 +11,7 @@ namespace MoviesUI.Controllers
         private readonly MovieRepository _moviesRepository;
         public MovieController(MoviesDbContext dbContext)
         {
+
             this.dbContext = dbContext;
         }
         // GET: MovieController
@@ -25,9 +26,18 @@ namespace MoviesUI.Controllers
         }
 
         // GET: MovieController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null) return NotFound();
+
+            var movie = dbContext.Movies
+                .Include(x => x.Directors)
+                .Include(x => x.Actors)
+                .Include(x => x.Genres)
+                .FirstOrDefault(x => x.Id == id);
+            if (movie == null) return NotFound();
+
+            return View(movie);
         }
 
         // GET: MovieController/Create
