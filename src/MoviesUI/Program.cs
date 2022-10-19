@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
+using MoviesRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 builder.Services.AddControllersWithViews();
 
+//Add all repositories
+builder.Services.AddTransient<UsersRepository>();
 
 var app = builder.Build();
 

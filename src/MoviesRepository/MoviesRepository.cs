@@ -2,11 +2,11 @@
 
 namespace MoviesRepository
 {
-    public class MovieRepository
+    public class MoviesRepository
     {
         private readonly MoviesDbContext _ctx;
 
-        public MovieRepository(MoviesDbContext ctx)
+        public MoviesRepository(MoviesDbContext ctx)
         {
             _ctx = ctx; 
         }

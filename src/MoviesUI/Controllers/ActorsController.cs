@@ -5,9 +5,9 @@ using MoviesRepository;
 
 namespace MoviesUI.Controllers
 {
-    public class ActorController : Controller
+    public class ActorsController : Controller
     {
-        private readonly ActorRepository _actorRepository;
+        private readonly ActorsRepository _actorRepository;
         private readonly MoviesDbContext dbContext;
         // GET: ActorController
         public ActionResult Index()
