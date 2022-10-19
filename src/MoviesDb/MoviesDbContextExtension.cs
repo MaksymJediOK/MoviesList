@@ -93,26 +93,8 @@ namespace MoviesCore
                 {
                     Id = 3,
                     GenreName = "Detective"
-                },
-                new Genre
-                {
-                    Id = 4,
-                    GenreName = "Criminal"
-                },
-                new Genre
-                {
-                    Id = 5,
-                    GenreName = "Adventure"
-                },
-                new Genre
-                {
-                    Id = 6,
-                    GenreName = "Comedy"
-                }, new Genre
-                {
-                    Id = 7,
-                    GenreName = "Drama"
                 });
+               
 
             builder.Entity<Director>().HasData(
                 new Director
@@ -129,18 +111,7 @@ namespace MoviesCore
                 }
                 );
 
-            builder.Entity<PublisherCountry>().HasData(
-                    new PublisherCountry
-                    {
-                        Id = 1,
-                        CountryName = "USA"
-                    },
-                    new PublisherCountry
-                    {
-                        Id = 2,
-                        CountryName = "France"
-                    }
-                );
+           
 
             builder.Entity<Movie>().HasData(
                 new Movie
@@ -152,9 +123,8 @@ namespace MoviesCore
                     Rating = 9.27f, //Should change to double
                     ReleaseYear = 2014,
                     Duration = 130,
-          
                 }
-                ) ;
+                );
         }
     }
 }

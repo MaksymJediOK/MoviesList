@@ -5,7 +5,11 @@ namespace MoviesCore
 {
     public class MoviesDbContext : IdentityDbContext<User>
     {
+        public MoviesDbContext(DbContextOptions<MoviesDbContext> options)
+         : base(options)
+        {
 
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Movie>()
@@ -19,16 +23,12 @@ namespace MoviesCore
             builder.Entity<Movie>()
                 .HasMany(x => x.Actors)
                 .WithMany(x => x.Movies);
+
             builder.Seed();
             base.OnModelCreating(builder);
         }
-        public MoviesDbContext(DbContextOptions<MoviesDbContext> options)
-            : base(options)
-        {
 
-        }
 
-    
         public DbSet<Movie>? Movies { get; set; }
         public DbSet<Genre>? Genres { get; set; }
         public DbSet<Director>? Directors { get; set; }

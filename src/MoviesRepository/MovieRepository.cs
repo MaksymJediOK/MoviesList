@@ -2,11 +2,11 @@
 
 namespace MoviesRepository
 {
-    public class MoviesRepository
+    public class MovieRepository
     {
         private readonly MoviesDbContext _ctx;
 
-        public MoviesRepository(MoviesDbContext ctx)
+        public MovieRepository(MoviesDbContext ctx)
         {
             _ctx = ctx; 
         }
@@ -15,5 +15,6 @@ namespace MoviesRepository
         {
             return  _ctx.Movies.ToList();
         }
+
     }
 }

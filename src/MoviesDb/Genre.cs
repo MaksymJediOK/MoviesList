@@ -14,7 +14,7 @@ namespace MoviesCore
 
         public override string ToString()
         {
-            return $"{GenreName}";
+            return $"{GenreName} ";
         }
     }
 }

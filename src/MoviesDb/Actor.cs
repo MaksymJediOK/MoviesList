@@ -11,6 +11,7 @@ namespace MoviesCore
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
+        public string? PhotoPath { get; set; }
         public List<Movie>? Movies { get; set; }
 
         public override string ToString()
