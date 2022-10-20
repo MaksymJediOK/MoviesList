@@ -120,7 +120,7 @@ namespace MoviesCore
                     Title = "Interstellar",
                     Description = "Some random text",
                     PosterPath = "https://static.posters.cz/image/750/%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82%D0%B8/interstellar-ice-walk-i23290.jpg",
-                    Rating = 9.27f, //Should change to double
+                    Rating = 9.27f,
                     ReleaseYear = 2014,
                     Duration = 130,
                 }

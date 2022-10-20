@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
 using MoviesRepository;
+using System.Diagnostics;
 
 namespace MoviesUI.Controllers
 {
@@ -43,24 +45,31 @@ namespace MoviesUI.Controllers
         }
 
         // GET: MovieController/Create
+        [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.Genres = new SelectList(dbContext.Genres.ToList());
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Movie movie)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            //Genre newgenre = dbContext.Genres.FirstOrDefault(x => x.Id == genre.Id);
+            //Movie newmovie = new Movie
+            //{
+            //    Title = movie.Title,
+            //    Description = movie.Description,
+            //    PosterPath = movie.PosterPath,
+            //    Rating = movie.Rating,
+            //    ReleaseYear = movie.ReleaseYear,
+            //    Duration = movie.Duration,
+            //    Genres = new List<Genre> { genre }
+            //};
+            dbContext.Add(movie);
+            dbContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: MovieController/Edit/5
@@ -85,26 +94,19 @@ namespace MoviesUI.Controllers
         }
 
         // GET: MovieController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            return View();
+            return View(dbContext.Movies.Find(id));
         }
 
         // POST: MovieController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            dbContext.Movies.Remove(dbContext.Movies.Find(id));
+            dbContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

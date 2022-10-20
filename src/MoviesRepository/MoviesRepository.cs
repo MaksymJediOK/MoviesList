@@ -1,4 +1,5 @@
 ﻿using MoviesCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MoviesRepository
 {
@@ -8,12 +9,12 @@ namespace MoviesRepository
 
         public MoviesRepository(MoviesDbContext ctx)
         {
-            _ctx = ctx; 
+            _ctx = ctx;
         }
 
         public List<Movie> GetAllMovies()
         {
-            return  _ctx.Movies.ToList();
+            return _ctx.Movies.ToList();
         }
 
         public Movie GetMovieById(int ID)
