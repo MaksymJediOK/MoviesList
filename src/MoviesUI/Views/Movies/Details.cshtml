@@ -1,7 +1,7 @@
 ﻿@model MoviesCore.Movie
 @{
 }
-
+<div class="container">
 <div class="row align-content-center">
 	<div class="col-6">
 		<img src="@Html.DisplayFor(modelItem => Model.PosterPath)" style="width:500px; height:500px" />
@@ -9,10 +9,11 @@
 	<div class="col-6" style="border: 1px solid grey">
 		<h3 class="fw-bold text-center">@Html.DisplayFor(modelItem => Model.Title)</h3>
 		<p>Actor Cast: @Html.DisplayFor(modelItem => Model.Actors)</p>
-		<p>Dorector: @Html.DisplayFor(modelItem => Model.Directors)</p>
+		<p>Director: @Html.DisplayFor(modelItem => Model.Directors)</p>
 		<p>Genres: @Html.DisplayFor(modelItem => Model.Genres)</p>
 		<p>Movie Duration: @Html.DisplayFor(modelItem => Model.Duration) min</p>
-		<p>IMDB Raitinig: @Html.DisplayFor(modelItem => Model.Rating) </p>
+		<p>IMDB Raiting: @Html.DisplayFor(modelItem => Model.Rating) </p>
 		<p>Year: @Html.DisplayFor(modelItem => Model.ReleaseYear) </p>
 	</div>
+</div>
 </div>

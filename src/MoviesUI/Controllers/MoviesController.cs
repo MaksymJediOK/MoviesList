@@ -55,8 +55,17 @@ namespace MoviesUI.Controllers
 
         // POST: MovieController/Create
         [HttpPost]
-        public ActionResult Create(Movie movie, IFormCollection collection)
+        public ActionResult Create(Movie movie)
         {
+            var genre = dbContext.Genres.FirstOrDefault(x => x.Id == 1);
+            movie.Genres = new List<Genre> { genre };
+
+            var director = dbContext.Directors.FirstOrDefault(x => x.Id == 1);
+            movie.Directors = new List<Director> { director };
+
+            var actor = dbContext.Actors.FirstOrDefault(x => x.Id == 1);
+            movie.Actors = new List<Actor> { actor };
+
             dbContext.Add(movie);
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -71,20 +80,20 @@ namespace MoviesUI.Controllers
         // POST: MovieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, IFormCollection collection)
+        public ActionResult Edit(Movie movie)
         {
-            if (id == null)
-            {
+            if (movie.Id == null)
                 return NotFound();
-            }
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            Movie edited = dbContext.Movies.FirstOrDefault(x => x.Id == movie.Id);
+            edited.Title = movie.Title;
+            edited.Description = movie.Description;
+            edited.Rating = movie.Rating;
+            edited.PosterPath = movie.PosterPath;
+            edited.Duration = movie.Duration;
+            edited.ReleaseYear = movie.ReleaseYear;
+            dbContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: MovieController/Delete/5
