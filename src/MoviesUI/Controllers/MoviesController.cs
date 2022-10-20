@@ -49,24 +49,14 @@ namespace MoviesUI.Controllers
         public ActionResult Create()
         {
             ViewBag.Genres = new SelectList(dbContext.Genres.ToList());
+            ViewBag.Directors = new SelectList(dbContext.Directors.ToList());
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
-        public ActionResult Create(Movie movie)
+        public ActionResult Create(Movie movie, IFormCollection collection)
         {
-            //Genre newgenre = dbContext.Genres.FirstOrDefault(x => x.Id == genre.Id);
-            //Movie newmovie = new Movie
-            //{
-            //    Title = movie.Title,
-            //    Description = movie.Description,
-            //    PosterPath = movie.PosterPath,
-            //    Rating = movie.Rating,
-            //    ReleaseYear = movie.ReleaseYear,
-            //    Duration = movie.Duration,
-            //    Genres = new List<Genre> { genre }
-            //};
             dbContext.Add(movie);
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -81,8 +71,12 @@ namespace MoviesUI.Controllers
         // POST: MovieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int? id, IFormCollection collection)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             try
             {
                 return RedirectToAction(nameof(Index));
