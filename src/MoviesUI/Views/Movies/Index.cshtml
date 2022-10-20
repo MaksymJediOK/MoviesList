@@ -3,22 +3,28 @@
 @{
 
 }
-<div class="row m-3">
-	@foreach (var item in Model)
-	{
-		<div class="col-6">
-			<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src=@Html.DisplayFor(modelItem => item.PosterPath) alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-					<p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-					<p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
-					<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View Details</a>
-					<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+<div class="row-cols-auto">
+	<a class="nav-link text-dark text-center" asp-area="" asp-controller="Movies" asp-action="Create">Add new movie </a>
+</div>
+<div class="container">
+	<div class="row m-3">
+		@foreach (var item in Model)
+		{
+			<div class="col-6">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" src=@Html.DisplayFor(modelItem => item.PosterPath) alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+						<p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+						<p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
+						<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View Details</a>
+						<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+						<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	}
-
+		}
+	</div>
 </div>
+
 

@@ -1,10 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<style>
+		.welcome {
+			background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png");
+			background-repeat: no-repeat;
+		}
 
+		.welcome-text {
+			padding: 45vh 0;
+			font-size: 50px;
+			color: #fff;
+		}
+	</style>
+
+	<div class="welcome">
+		<div class="welcome-text">Welcome to movie catalog</div>
+	</div>
 
 </div>
